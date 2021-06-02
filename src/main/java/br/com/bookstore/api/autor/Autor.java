@@ -1,30 +1,38 @@
 package br.com.bookstore.api.autor;
 
-import java.util.Date;
+import java.io.Serializable;
+import java.time.LocalDate;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author Tiago
  */
-public class Autor {
+@Entity
+@Table(name = "autores")
+public class Autor implements Serializable {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
+    
+    @Column(nullable = false)
     private String nome;
-    private Date dataNascimento;
+    
+    @Column(name = "data_nascimento")
+    private LocalDate dataNascimento;
+    
+    @Enumerated(EnumType.STRING)
     private Genero genero;
     //
     public Autor() {
-    }
-    public Autor(String nome, Date dataNascimento, Genero genero) {
-        this.nome = nome;
-        this.dataNascimento = dataNascimento;
-        this.genero = genero;
-    }
-    public Autor(int id, String nome, Date dataNascimento, Genero genero) {
-        this.id = id;
-        this.nome = nome;
-        this.dataNascimento = dataNascimento;
-        this.genero = genero;
     }
     //
     public int getId() {
@@ -33,7 +41,7 @@ public class Autor {
     public String getNome() {
         return nome;
     }
-    public Date getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
     public Genero getGenero() {
@@ -46,7 +54,7 @@ public class Autor {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
     public void setGenero(Genero genero) {
